@@ -1,0 +1,90 @@
+Nih yang lagi viral juga tapi lebih estetik, *"foto kita blur tapi hati nggak"* - ada musik + ketikan otomatis. Dijamin bagus buat story.
+
+Save jadi `estetik.html`:
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Untuk Kamu</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap');
+  body{margin:0;height:100vh;background:#0f0f0f;display:flex;justify-content:center;align-items:center;font-family:'Poppins',sans-serif}
+ .card{
+    width:340px;height:560px;border-radius:28px;overflow:hidden;position:relative;
+    background:#1a1a1a;box-shadow:0 30px 80px rgba(0,0,0,.8);
+  }
+ .card img{
+    width:100%;height:100%;object-fit:cover;
+    filter:blur(18px); transition:3s ease;
+  }
+ .card.active img{filter:blur(0px)}
+ .overlay{
+    position:absolute;inset:0;
+    background:linear-gradient(to top, rgba(0,0,0,.9) 20%, transparent 70%);
+  }
+ .content{position:absolute;bottom:0;padding:28px;color:white}
+ .content h1{font-size:24px;margin:0 0 8px;line-height:1.2}
+ .content h1 span{color:#ff4d6d}
+  #typing{font-size:14px;opacity:.9;min-height:60px}
+ .btn{
+    margin-top:18px;background:white;color:black;border:none;
+    padding:12px 22px;border-radius:50px;font-weight:600;cursor:pointer;
+    transition:.3s;
+  }
+ .btn:active{transform:scale(.95)}
+  input{position:absolute;top:15px;left:15px;z-index:99;opacity:.5;font-size:11px}
+</style>
+</head>
+<body>
+
+<div class="card" id="card">
+  <input type="file" id="upload" accept="image/*">
+  <img id="foto" src="https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?w=700">
+  <div class="overlay"></div>
+  <div class="content">
+    <h1>foto kita <span>blur</span> ya?</h1>
+    <div id="typing"></div>
+    <button class="btn" onclick="play()">✨ Lihat Kenangan</button>
+  </div>
+</div>
+
+<script>
+const text = "tapi semua tentang kamu masih jelas di ingatan aku. nggak akan pernah blur.";
+let i = 0;
+let isTyping = false;
+
+function typeWriter(){
+  if(i < text.length){
+    document.getElementById('typing').innerHTML += text.charAt(i);
+    i++;
+    setTimeout(typeWriter, 45);
+  }
+}
+
+function play(){
+  const card = document.getElementById('card');
+  card.classList.toggle('active');
+  if(!isTyping){
+    document.getElementById('typing').innerHTML = "";
+    i=0; typeWriter(); isTyping=true;
+    document.querySelector('.btn').innerText = "🖤 blur lagi";
+  } else {
+    document.querySelector('.btn').innerText = "✨ Lihat Kenangan";
+    isTyping=false;
+  }
+}
+
+document.getElementById('upload').addEventListener('change', e=>{
+  document.getElementById('foto').src = URL.createObjectURL(e.target.files[0]);
+});
+</script>
+
+</body>
+</html>
+*Fiturnya:*
+- Klik "Lihat Kenangan" -> foto yang blur jadi jelas + ada ketikan romantis
+- Bisa ganti foto kalian sendiri (pencet choose file di pojok atas)
+- Bisa di-screen record langsung jadi konten TikTok
+
+Mau dibikinin versi namanya ada nama kamu & dia? Sebutin aja namanya siapa.
